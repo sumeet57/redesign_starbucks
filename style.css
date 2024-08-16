@@ -65,19 +65,19 @@ img {
 @keyframes loading_logo {
   0% {
     opacity: 0.2;
-    filter: blur(2px);
+    /* filter: blur(2px); */
   }
   25% {
     opacity: 0.4;
-    filter: blur(2px);
+    /* filter: blur(2px); */
   }
   50% {
     opacity: 0.6;
-    filter: blur(2px);
+    /* filter: blur(2px); */
   }
   75% {
     opacity: 0.8;
-    filter: blur(1px);
+    /* filter: blur(1px); */
   }
   100% {
     opacity: 1;
@@ -499,7 +499,7 @@ header nav h2:hover {
   display: flex;
   transform: translateX(0);
   opacity: 0.4;
-  filter: blur(2px);
+  /* filter: blur(2px); */
 }
 
 @keyframes move_left {
@@ -558,7 +558,7 @@ header nav h2:hover {
   --bg-position-x: 67%;
   --bg-position-y: -100px;
   position: relative;
-  /* background-color: #006241; */
+  will-change: transform, opacity;
   aspect-ratio: 2/3.6;
   width: 200px;
   mask-image: url(./starbucks/mockup.png);
@@ -627,7 +627,8 @@ header nav h2:hover {
   height: 100%;
   object-fit: contain;
   scale: 1.3;
-  filter: blur(2px);
+  /* opacity: 0.5; */
+  /* filter: blur(2px); */
 }
 
 .divi p span {
@@ -843,15 +844,17 @@ header nav h2:hover {
 footer {
   width: 100%;
   height: max-content;
-  padding: 2vw 0;
+  padding: 50px 10px;
 }
 footer .p1 {
   width: 100%;
   padding: 2vw;
+  margin: 10px 0;
 }
 footer .p2 {
   width: 100%;
   padding: 2vw;
+  margin: 10px 0;
   padding-bottom: 4vw;
 }
 footer .p1 i {
@@ -922,5 +925,9 @@ footer .p2 p {
   }
   .page .part p {
     font-size: 3vw;
+  }
+  footer .p1 i {
+    font-size: 9vw;
+    margin: 2px;
   }
 }

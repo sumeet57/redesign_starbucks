@@ -1,6 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("load", () => {
-    document.querySelector(".loading").style.left = "110%";
+    let temp = 0;
+    setTimeout(() => {
+      document.querySelector(".loading").style.left = "110%";
+      temp = 1;
+    }, 2000);
+
+    if (temp == 1) {
+      document.querySelector(".loading").remove();
+    }
+
     document.querySelector("#main").style.display = "block";
   });
 
@@ -33,17 +42,19 @@ document.addEventListener("DOMContentLoaded", function () {
         trigger: ".page1 .cont",
         start: startTrigger,
         end: endTrigger,
-        scrub: 2,
+        scrub: true,
         onUpdate: (self) => {
           // console.log("Update progress:", self.progress);
           if (self.progress === 1 && !hasTriggered) {
-            document.querySelector(".page1 .home_img").style.opacity = "1";
-            document.querySelector(".div1 .div1_img").style.opacity = "0.5";
-            document.querySelector(".div2 .div2_img").style.opacity = "0.5";
-            document.querySelector(".div3 .div3_img").style.opacity = "0.5";
-            document.querySelector(".page1 .cont").style.opacity = "0";
-            document.querySelector(".page1 .cont").style.display = "none";
-            hasTriggered = true;
+            requestAnimationFrame(() => {
+              document.querySelector(".page1 .home_img").style.opacity = "1";
+              document.querySelector(".div1 .div1_img").style.opacity = "0.5";
+              document.querySelector(".div2 .div2_img").style.opacity = "0.5";
+              document.querySelector(".div3 .div3_img").style.opacity = "0.5";
+              document.querySelector(".page1 .cont").style.opacity = "0";
+              document.querySelector(".page1 .cont").style.display = "none";
+              hasTriggered = true;
+            });
           }
         },
         // markers: true, // Uncomment for debugging
@@ -75,141 +86,64 @@ document.addEventListener("DOMContentLoaded", function () {
   // Ensure function is called after the DOM is fully loaded
   window.onload = initializeTimeline;
 
-  // Initialize timeline
-  // let t1 = initializeTimeline();
+  function animateCup(
+    selector,
+    start,
+    end,
+    bgPositionX,
+    bgPositionY,
+    filter = null
+  ) {
+    requestAnimationFrame(() => {
+      let gsapConfig = {
+        "--bg-position-x": bgPositionX,
+        "--bg-position-y": bgPositionY,
+        transform: "translateZ(0)", // Forces hardware acceleration
+        scrollTrigger: {
+          scroller: "body",
+          trigger: selector,
+          start: start,
+          end: end,
+          ease: "power1.out",
+          duration: 2,
+        },
+      };
 
-  // // Handle window resize to update the ScrollTrigger
-  // window.addEventListener("resize", () => {
-  //   // Destroy existing ScrollTrigger
-  //   if (t1) {
-  //     t1.scrollTrigger.kill();
-  //   }
+      // if (filter) {
+      //   gsapConfig.filter = filter;
+      // }
 
-  //   // Reinitialize timeline
-  //   t1 = initializeTimeline();
-  // });
+      gsap.to(selector, gsapConfig);
+    });
+  }
 
-  //rotate cup
+  // Rotate cup based on viewport dimensions
   if (window.innerWidth >= 800 && window.innerHeight > 1000) {
-    gsap.to(".page1 .cont .g", {
-      "--bg-position-x": "380%",
-      "--bg-position-y": "-85px",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "270% 100%",
-        end: "300% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
-    gsap.to(".page1 .cont .g", {
-      "--bg-position-x": "67%",
-      "--bg-position-y": "-85px",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "550% 100%",
-        end: "580% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
-    gsap.to(".page1 .cont .g", {
-      "--bg-position-x": "587%",
-      "--bg-position-y": "-85px",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "820% 100%",
-        end: "850% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
+    animateCup(".page1 .cont .g", "270% 100%", "300% 100%", "380%", "-85px");
+    animateCup(".page1 .cont .g", "550% 100%", "580% 100%", "67%", "-85px");
+    animateCup(".page1 .cont .g", "820% 100%", "850% 100%", "587%", "-85px");
   } else if (window.innerWidth >= 800) {
-    gsap.to(".page1 .cont .g", {
-      filter: "blur(2px)", // Removed one filter
-      "--bg-position-x": "380%",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "180% 100%",
-        end: "210% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
-    gsap.to(".page1 .cont .g", {
-      "--bg-position-x": "67%",
-      "--bg-position-y": "-85px",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "360% 100%",
-        end: "390% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
-    gsap.to(".page1 .cont .g", {
-      "--bg-position-x": "344%",
-      "--bg-position-y": "-85px",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "560% 100%",
-        end: "590% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
+    animateCup(
+      ".page1 .cont .g",
+      "180% 100%",
+      "210% 100%",
+      "380%",
+      "-85px",
+      "blur(2px)"
+    );
+    animateCup(".page1 .cont .g", "360% 100%", "390% 100%", "67%", "-85px");
+    animateCup(".page1 .cont .g", "560% 100%", "590% 100%", "344%", "-85px");
   } else {
-    gsap.to(".page1 .cont .g", {
-      filter: "blur(2px)", // Removed one filter
-      "--bg-position-x": "380%",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "220% 100%",
-        end: "250% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
-    gsap.to(".page1 .cont .g", {
-      "--bg-position-x": "67%",
-      "--bg-position-y": "-85px",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "400% 100%",
-        end: "430% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
-    gsap.to(".page1 .cont .g", {
-      "--bg-position-x": "587%",
-      "--bg-position-y": "-85px",
-      transform: "translateZ(0)", // Forces hardware acceleration
-      scrollTrigger: {
-        scroller: "body",
-        trigger: ".page1 .cont .g",
-        start: "600% 100%",
-        end: "630% 100%",
-        ease: "power1.out",
-        duration: 2,
-      },
-    });
+    animateCup(
+      ".page1 .cont .g",
+      "220% 100%",
+      "250% 100%",
+      "380%",
+      "-85px",
+      "blur(2px)"
+    );
+    animateCup(".page1 .cont .g", "400% 100%", "430% 100%", "67%", "-85px");
+    animateCup(".page1 .cont .g", "600% 100%", "630% 100%", "587%", "-85px");
   }
 
   //nav
@@ -217,32 +151,38 @@ document.addEventListener("DOMContentLoaded", function () {
   let flag = 0;
   let bt_menu = document.querySelector(".menu-icon");
   let bt_close = document.querySelector(".close-icon");
+
   bt_menu.addEventListener("click", () => {
     if (flag == 0) {
-      let n1 = gsap.timeline();
-      n1.to(".full-menu", {
-        left: 0,
+      requestAnimationFrame(() => {
+        let n1 = gsap.timeline();
+        n1.to(".full-menu", {
+          left: 0,
+        });
+        n1.to(".full-menu p", {
+          opacity: 1,
+          transform: "translateY(-0%)",
+          stagger: 0.15,
+        });
+        flag = 1;
       });
-      n1.to(".full-menu p", {
-        opacity: 1,
-        transform: "translateY(-0%)",
-        stagger: 0.15,
-      });
-      flag = 1;
     }
   });
+
   bt_close.addEventListener("click", () => {
     if (flag == 1) {
-      let n1 = gsap.timeline();
-      n1.to(".full-menu p", {
-        opacity: 0,
-        transform: "translateY(-80%)",
-        stagger: 0.15,
+      requestAnimationFrame(() => {
+        let n1 = gsap.timeline();
+        n1.to(".full-menu p", {
+          opacity: 0,
+          transform: "translateY(-80%)",
+          stagger: 0.15,
+        });
+        n1.to(".full-menu", {
+          left: "100%",
+        });
+        flag = 0;
       });
-      n1.to(".full-menu", {
-        left: "100%",
-      });
-      flag = 0;
     }
   });
 });
