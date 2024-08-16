@@ -14,20 +14,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const viewportHeight = window.innerHeight;
 
     // Adjust the end value based on viewport dimensions
-    if (viewportWidth >= 800) {
+    if (viewportWidth >= 800 && viewportHeight < 1000) {
+      console.log("here1");
       endTrigger = "500% 15%"; // Adjust this value for larger screens
     } else if (viewportHeight > 1000) {
+      console.log("here2");
       endTrigger = "800% 15%"; // Adjust this value for taller screens
-    } else {
-      endTrigger = "550% 15%"; // Default value for smaller screens
-    }
-
-    if (viewportHeight > 1200) {
+    } else if (viewportHeight > 1200) {
+      console.log("here3");
       endTrigger = "900% 15%";
-    }
-
-    if (viewportWidth <= 350) {
-      endTrigger = "450% 15%";
+    } else if (viewportWidth <= 350) {
+      console.log("here4");
+      endTrigger = "550% 15%";
+    } else if (viewportHeight < 700) {
+      console.log("here5");
+      endTrigger = "500% 15%";
+    } else {
+      console.log("here6");
+      endTrigger = "600% 15%"; // Default value for smaller screens
     }
 
     // Initialize GSAP timeline
@@ -44,22 +48,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Define animations
     t1.to(".page1 .cont", {
-      top: "150%",
-      opacity: "0.4",
-      filter: "blur(2px)",
-      duration: 2,
+      y: "70vh",
+      opacity: 0.4,
+      duration: 4,
+      ease: "power2.out",
     })
       .to(".page1 .cont", {
-        top: "250%",
-        opacity: "0.4",
-        filter: "blur(2px)",
-        duration: 2, // Duration in seconds
+        y: "170vh",
+        opacity: 0.4,
+        duration: 4,
+        ease: "power1.out",
       })
       .to(".page1 .cont", {
-        top: "350%",
-        opacity: "0.4",
-        filter: "blur(2px)",
-        duration: 2, // Duration in seconds
+        y: "270vh",
+        opacity: 0.4,
+        duration: 4,
+        ease: "power1.out",
       });
 
     return t1;
@@ -84,106 +88,120 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.to(".page1 .cont .g", {
       "--bg-position-x": "380%",
       "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "270% 100%",
-        // end: "170% 95%",
+        end: "300% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
     gsap.to(".page1 .cont .g", {
       "--bg-position-x": "67%",
       "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "550% 100%",
-        // end: "300% 95%",
+        end: "580% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
     gsap.to(".page1 .cont .g", {
       "--bg-position-x": "587%",
       "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "820% 100%",
-        // end: "525% 95%",
+        end: "850% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
   } else if (window.innerWidth >= 800) {
     gsap.to(".page1 .cont .g", {
-      filter: "blur(30px)",
+      filter: "blur(2px)", // Removed one filter
       "--bg-position-x": "380%",
-      filter: "blur(0px)",
-      "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "180% 100%",
-        // end: "170% 95%",
+        end: "210% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
     gsap.to(".page1 .cont .g", {
       "--bg-position-x": "67%",
       "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "360% 100%",
-        // end: "340% 95%",
+        end: "390% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
     gsap.to(".page1 .cont .g", {
       "--bg-position-x": "344%",
       "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "560% 100%",
-        // end: "525% 95%",
+        end: "590% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
   } else {
     gsap.to(".page1 .cont .g", {
-      filter: "blur(30px)",
+      filter: "blur(2px)", // Removed one filter
       "--bg-position-x": "380%",
-      filter: "blur(0px)",
-      "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "220% 100%",
-        end: "170% 95%",
+        end: "250% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
     gsap.to(".page1 .cont .g", {
       "--bg-position-x": "67%",
       "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "400% 100%",
-        end: "340% 95%",
+        end: "430% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
     gsap.to(".page1 .cont .g", {
       "--bg-position-x": "587%",
       "--bg-position-y": "-85px",
+      transform: "translateZ(0)", // Forces hardware acceleration
       scrollTrigger: {
         scroller: "body",
-        // markers: true,
         trigger: ".page1 .cont .g",
         start: "600% 100%",
-        end: "525% 95%",
+        end: "630% 100%",
+        ease: "power1.out",
+        duration: 2,
       },
     });
   }
