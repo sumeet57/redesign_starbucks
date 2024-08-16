@@ -6,35 +6,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to initialize the timeline
   function initializeTimeline() {
-    // Define viewport-based start and end values
     const startTrigger = "-40% 15%";
     let endTrigger;
+    let hasTriggered = false;
 
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    // Adjust the end value based on viewport dimensions
-    if (viewportWidth >= 800 && viewportHeight < 1000) {
-      console.log("here1");
-      endTrigger = "500% 15%"; // Adjust this value for larger screens
-    } else if (viewportHeight > 1000) {
-      console.log("here2");
-      endTrigger = "800% 15%"; // Adjust this value for taller screens
-    } else if (viewportHeight > 1200) {
-      console.log("here3");
+    if (viewportHeight > 1200) {
       endTrigger = "900% 15%";
+    } else if (viewportHeight > 1000) {
+      endTrigger = "800% 15%";
+    } else if (viewportWidth >= 800 && viewportHeight < 1000) {
+      endTrigger = "500% 15%";
     } else if (viewportWidth <= 350) {
-      console.log("here4");
       endTrigger = "550% 15%";
     } else if (viewportHeight < 700) {
-      console.log("here5");
       endTrigger = "500% 15%";
     } else {
-      console.log("here6");
-      endTrigger = "600% 15%"; // Default value for smaller screens
+      endTrigger = "600% 15%";
     }
 
-    // Initialize GSAP timeline
     const t1 = gsap.timeline({
       scrollTrigger: {
         scroller: "body",
@@ -42,25 +34,36 @@ document.addEventListener("DOMContentLoaded", function () {
         start: startTrigger,
         end: endTrigger,
         scrub: 2,
+        onUpdate: (self) => {
+          // console.log("Update progress:", self.progress);
+          if (self.progress === 1 && !hasTriggered) {
+            document.querySelector(".page1 .home_img").style.opacity = "1";
+            document.querySelector(".div1 .div1_img").style.opacity = "0.5";
+            document.querySelector(".div2 .div2_img").style.opacity = "0.5";
+            document.querySelector(".div3 .div3_img").style.opacity = "0.5";
+            document.querySelector(".page1 .cont").style.opacity = "0";
+            document.querySelector(".page1 .cont").style.display = "none";
+            hasTriggered = true;
+          }
+        },
         // markers: true, // Uncomment for debugging
       },
     });
 
-    // Define animations
     t1.to(".page1 .cont", {
-      y: "70vh",
+      y: "100vh",
       opacity: 0.4,
       duration: 4,
       ease: "power2.out",
     })
       .to(".page1 .cont", {
-        y: "170vh",
+        y: "200vh",
         opacity: 0.4,
         duration: 4,
         ease: "power1.out",
       })
       .to(".page1 .cont", {
-        y: "270vh",
+        y: "300vh",
         opacity: 0.4,
         duration: 4,
         ease: "power1.out",
@@ -69,19 +72,22 @@ document.addEventListener("DOMContentLoaded", function () {
     return t1;
   }
 
+  // Ensure function is called after the DOM is fully loaded
+  window.onload = initializeTimeline;
+
   // Initialize timeline
-  let t1 = initializeTimeline();
+  // let t1 = initializeTimeline();
 
-  // Handle window resize to update the ScrollTrigger
-  window.addEventListener("resize", () => {
-    // Destroy existing ScrollTrigger
-    if (t1) {
-      t1.scrollTrigger.kill();
-    }
+  // // Handle window resize to update the ScrollTrigger
+  // window.addEventListener("resize", () => {
+  //   // Destroy existing ScrollTrigger
+  //   if (t1) {
+  //     t1.scrollTrigger.kill();
+  //   }
 
-    // Reinitialize timeline
-    t1 = initializeTimeline();
-  });
+  //   // Reinitialize timeline
+  //   t1 = initializeTimeline();
+  // });
 
   //rotate cup
   if (window.innerWidth >= 800 && window.innerHeight > 1000) {
