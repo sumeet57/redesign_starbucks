@@ -555,7 +555,7 @@ header nav h2:hover {
 }
 
 .page1 .cont .g {
-  --bg-position-x: 67%;
+  --bg-position-x: -67%;
   --bg-position-y: -100px;
   position: relative;
   will-change: transform, opacity;
@@ -565,6 +565,7 @@ header nav h2:hover {
   mask-size: cover; /* Ensure the mask covers the entire element */
   mask-position: center;
   transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
+  background-position: center center;
 }
 
 .page1 .cont .g::before,
@@ -575,7 +576,7 @@ header nav h2:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-position: center; */
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
