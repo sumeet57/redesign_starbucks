@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     animateCup(".page1 .cont .g", "550% 100%", "580% 100%", "67%", "-85px");
     animateCup(".page1 .cont .g", "820% 100%", "850% 100%", "587%", "-85px");
   } else if (window.innerWidth >= 800) {
+    console.log("pc");
     animateCup(
       ".page1 .cont .g",
       "180% 100%",

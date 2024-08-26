@@ -583,7 +583,7 @@ header nav h2:hover {
 .page1 .cont .g::before {
   background-image: url(./starbucks/imgback.png);
   background-size: 650% 100%;
-  background-position: var(--bg-position-x) 38px;
+  background-position: 380% 38px;
   z-index: 1;
   background-repeat: repeat-x;
   /* width: 300px; */
