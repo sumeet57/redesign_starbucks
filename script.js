@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "blur(2px)"
     );
     animateCup(".page1 .cont .g", "400% 100%", "430% 100%", "67%", "-85px");
-    animateCup(".page1 .cont .g", "600% 100%", "630% 100%", "587%", "-85px");
+    animateCup(".page1 .cont .g", "600% 100%", "630% 100%", "344%", "-85px");
   }
 
   //nav
